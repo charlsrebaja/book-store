@@ -3,6 +3,10 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
+// Mark as dynamic to prevent static generation during build
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
+
 export async function PUT(
   request: NextRequest,
   context: { params: { id: string } }
