@@ -5,11 +5,12 @@ This guide will walk you through deploying the Readify bookstore application to 
 ## Table of Contents
 
 1. [Prerequisites](#prerequisites)
-2. [Environment Variables Setup](#environment-variables-setup)
-3. [Database Setup](#database-setup)
-4. [Vercel Deployment Steps](#vercel-deployment-steps)
-5. [Post-Deployment Configuration](#post-deployment-configuration)
-6. [Troubleshooting](#troubleshooting)
+2. [Build Error Fixes](#build-error-fixes)
+3. [Environment Variables Setup](#environment-variables-setup)
+4. [Database Setup](#database-setup)
+5. [Vercel Deployment Steps](#vercel-deployment-steps)
+6. [Post-Deployment Configuration](#post-deployment-configuration)
+7. [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -19,8 +20,31 @@ Before deploying to Vercel, ensure you have:
 
 - [x] GitHub account with your repository pushed
 - [x] Vercel account (sign up at [vercel.com](https://vercel.com))
-- [x] MySQL database (production ready)
-- [x] Google OAuth credentials (for Google sign-in)
+- [x] PostgreSQL database (using Neon - production ready)
+- [x] Cloudinary account (for image uploads)
+- [x] Google OAuth credentials (Optional - for Google sign-in)
+
+---
+
+## Build Error Fixes
+
+### Recent Fixes Applied
+
+The following fixes have been applied to resolve build errors:
+
+1. **Added GET handlers to dynamic API routes** - All dynamic routes now have proper GET methods
+2. **Updated Prisma configuration** - Improved database connection handling during build
+3. **Modified build script** - Added `prisma generate` to build process
+4. **Added postinstall script** - Ensures Prisma Client is generated after dependency installation
+5. **Made Google OAuth optional** - Google provider is only added if credentials are present
+
+### Build Command
+
+The build command has been updated in `package.json`:
+
+```bash
+"build": "prisma generate && next build"
+```
 
 ---
 
@@ -31,19 +55,21 @@ Before deploying to Vercel, ensure you have:
 You'll need to configure these environment variables in Vercel:
 
 ```env
-# Database Configuration
-DATABASE_URL="mysql://username:password@host:port/database_name"
+# Database Configuration (PostgreSQL via Neon)
+DATABASE_URL="postgresql://user:password@host/database?sslmode=require"
 
 # NextAuth Configuration
 NEXTAUTH_URL="https://your-domain.vercel.app"
 NEXTAUTH_SECRET="your-generated-secret-key"
 
+# Cloudinary Configuration (Required for image uploads)
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME="your-cloud-name"
+CLOUDINARY_API_KEY="your-api-key"
+CLOUDINARY_API_SECRET="your-api-secret"
+
 # Google OAuth (Optional - for Google Sign-In)
 GOOGLE_CLIENT_ID="your-google-client-id"
 GOOGLE_CLIENT_SECRET="your-google-client-secret"
-
-# Node Environment
-NODE_ENV="production"
 ```
 
 ### Generating NEXTAUTH_SECRET
