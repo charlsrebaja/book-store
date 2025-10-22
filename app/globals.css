@@ -1,0 +1,300 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========================================
+   CROSS-BROWSER FIXES & NORMALIZATION
+   ======================================== */
+
+:root {
+  /* New Modern Color Palette */
+  --white: #ffffff;
+  --cream-brown: #d7bfae;
+  --cream-brown-light: #e8ddd4;
+  --text-dark: #2b2b2b;
+  --text-gray: #4b5563;
+  --accent: #d7bfae;
+  --border-light: #e8e8e8;
+
+  /* Legacy colors (for compatibility) */
+  --cream: #f5f5dc;
+  --dark-blue: #1a3a52;
+  --light-gold: #d4af37;
+  --sage: #9caf88;
+}
+
+/* Reset box-sizing for all elements (cross-browser) */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* HTML & Body baseline */
+html {
+  scroll-behavior: smooth;
+  overflow-x: auto;
+
+  /* Text size adjust - prevent text inflation on mobile (all browsers) */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+
+  /* Scrollbar space reservation - fallback for older Safari */
+  overflow-y: scroll;
+
+  /* Edge-specific: Force consistent scrollbar width */
+  -ms-scrollbar-base-color: #e8e8e8;
+  -ms-scrollbar-face-color: #d7bfae;
+}
+
+/* Ensure body takes full width accounting for scrollbar */
+body {
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  background-color: var(--white);
+  background-image: linear-gradient(135deg, #ffffff 0%, #f9f7f5 100%);
+  background-attachment: fixed;
+  color: var(--text-dark);
+  line-height: 1.6;
+  -webkit-font-feature-settings: "kern" 1;
+  font-feature-settings: "kern" 1;
+  -webkit-tap-highlight-color: transparent;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-x: auto;
+  position: relative;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  line-height: 1.2;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Links */
+a {
+  color: inherit;
+  text-decoration: none;
+  -webkit-touch-callout: none;
+  background-color: transparent;
+}
+
+a:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Buttons */
+button {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/* Forms */
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0;
+}
+
+input::-ms-clear,
+input::-ms-reveal {
+  display: none;
+}
+
+/* Fix for Edge scrollbar */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+select {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D7BFAE' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Utility Classes */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  width: 100%;
+}
+
+.btn {
+  @apply px-6 py-3 rounded-lg font-medium transition-all duration-300 ease-in-out;
+}
+
+.btn-primary {
+  @apply bg-accent text-[#2B2B2B] hover:bg-opacity-90 font-medium;
+}
+
+.btn-secondary {
+  @apply bg-[#2B2B2B] text-white hover:opacity-90 font-medium;
+}
+
+.btn-outline {
+  @apply border-2 border-accent text-[#2B2B2B] hover:bg-accent hover:text-white;
+}
+
+.card {
+  @apply bg-white bg-opacity-40 backdrop-blur-lg rounded-2xl shadow-lg p-6 transition-all duration-300 hover:shadow-xl border border-white border-opacity-20;
+}
+
+.badge {
+  @apply inline-block px-3 py-1 rounded-full text-sm font-medium;
+}
+
+.badge-success {
+  @apply bg-green-100 bg-opacity-70 text-green-800 backdrop-blur-sm;
+}
+
+.badge-warning {
+  @apply bg-yellow-100 bg-opacity-70 text-yellow-800 backdrop-blur-sm;
+}
+
+.badge-error {
+  @apply bg-red-100 bg-opacity-70 text-red-800 backdrop-blur-sm;
+}
+
+.input-field {
+  @apply w-full px-4 py-3 border border-[#E8E8E8] rounded-lg bg-white bg-opacity-60 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-accent focus:bg-opacity-100 transition-all;
+}
+
+.scroll-smooth {
+  scroll-behavior: smooth;
+}
+
+/* Glassmorphism Effects */
+.glass {
+  @apply bg-white bg-opacity-10 backdrop-blur-md rounded-2xl border border-white border-opacity-20;
+}
+
+.glass-card {
+  @apply bg-white bg-opacity-40 backdrop-blur-lg rounded-2xl shadow-lg p-6 border border-white border-opacity-20;
+}
+
+.glass-sm {
+  @apply bg-white bg-opacity-30 backdrop-blur-md rounded-xl border border-white border-opacity-10;
+}
+
+.glass-input {
+  @apply bg-white bg-opacity-60 backdrop-blur-sm border border-white border-opacity-30 rounded-lg focus:bg-opacity-100 focus:ring-2 focus:ring-accent;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+.slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+/* Hero Section with Background Image */
+.hero-bg {
+  background-image: url("/images/hero/hero-bg1.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg {
+    background-attachment: scroll;
+  }
+
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    background: white;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+}
