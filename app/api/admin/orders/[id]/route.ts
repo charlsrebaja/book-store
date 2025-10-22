@@ -9,9 +9,9 @@ export const runtime = "nodejs";
 
 export async function PUT(
   request: NextRequest,
-  context: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const { params } = context;
+  const { id } = await params;
   try {
     const session = await getServerSession(authOptions);
 
@@ -42,7 +42,7 @@ export async function PUT(
     }
 
     const order = await prisma.order.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         status: data.status,
       },
@@ -74,9 +74,9 @@ export async function PUT(
 
 export async function DELETE(
   _request: NextRequest,
-  context: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const { params } = context;
+  const { id } = await params;
   try {
     const session = await getServerSession(authOptions);
 
@@ -93,7 +93,7 @@ export async function DELETE(
     }
 
     await prisma.order.delete({
-      where: { id: params.id },
+      where: { id },
     });
 
     return NextResponse.json({ message: "Order deleted successfully" });

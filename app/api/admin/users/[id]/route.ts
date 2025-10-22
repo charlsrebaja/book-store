@@ -9,9 +9,9 @@ export const runtime = "nodejs";
 
 export async function PUT(
   request: NextRequest,
-  context: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const { params } = context;
+  const { id } = await params;
   try {
     const session = await getServerSession(authOptions);
 
@@ -35,7 +35,7 @@ export async function PUT(
     }
 
     const user = await prisma.user.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         role: data.role,
       },
@@ -60,9 +60,9 @@ export async function PUT(
 
 export async function DELETE(
   _request: NextRequest,
-  context: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const { params } = context;
+  const { id } = await params;
   try {
     const session = await getServerSession(authOptions);
 
@@ -79,7 +79,7 @@ export async function DELETE(
     }
 
     // Prevent admin from deleting themselves
-    if (currentUser.id === params.id) {
+    if (currentUser.id === id) {
       return NextResponse.json(
         { error: "Cannot delete your own account" },
         { status: 400 }
@@ -87,7 +87,7 @@ export async function DELETE(
     }
 
     await prisma.user.delete({
-      where: { id: params.id },
+      where: { id },
     });
 
     return NextResponse.json({ message: "User deleted successfully" });

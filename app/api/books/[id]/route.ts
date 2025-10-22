@@ -9,12 +9,12 @@ export const runtime = "nodejs";
 
 export async function GET(
   _request: NextRequest,
-  context: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const { params } = context;
+  const { id } = await params;
   try {
     const book = await prisma.book.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!book) {
@@ -32,9 +32,9 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  context: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const { params } = context;
+  const { id } = await params;
   try {
     const session = await getServerSession(authOptions);
 
@@ -61,7 +61,7 @@ export async function PUT(
     }
 
     const book = await prisma.book.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         title: data.title,
         author: data.author,
@@ -87,9 +87,9 @@ export async function PUT(
 
 export async function DELETE(
   _request: NextRequest,
-  context: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const { params } = context;
+  const { id } = await params;
   try {
     const session = await getServerSession(authOptions);
 
@@ -101,7 +101,7 @@ export async function DELETE(
     }
 
     await prisma.book.delete({
-      where: { id: params.id },
+      where: { id },
     });
 
     return NextResponse.json({ message: "Book deleted successfully" });
