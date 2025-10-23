@@ -7,7 +7,6 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 import { MdEmail, MdLock, MdVisibility, MdVisibilityOff } from "react-icons/md";
-import { BiBook } from "react-icons/bi";
 
 export default function SignInPage() {
   const router = useRouter();
@@ -67,36 +66,6 @@ export default function SignInPage() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.3 }}
       >
-        {/* Logo and Header */}
-        <div className="text-center">
-          <motion.div
-            className="flex justify-center mb-4"
-            initial={{ y: -20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.1 }}
-          >
-            <div className="bg-gradient-to-br from-darkBlue to-blue-600 p-4 rounded-full shadow-lg">
-              <BiBook className="w-12 h-12 text-white" />
-            </div>
-          </motion.div>
-          <motion.h2
-            className="font-playfair text-4xl font-bold text-darkBlue mb-2"
-            initial={{ y: -20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2 }}
-          >
-            Welcome Back
-          </motion.h2>
-          <motion.p
-            className="text-gray-600 text-lg"
-            initial={{ y: -20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.3 }}
-          >
-            Sign in to continue to Readify
-          </motion.p>
-        </div>
-
         {/* Sign In Card */}
         <motion.div
           className="bg-white rounded-2xl shadow-xl p-8 space-y-6"
