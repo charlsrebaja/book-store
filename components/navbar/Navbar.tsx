@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
 import { useCartStore } from "@/lib/store";
 import { usePathname } from "next/navigation";
@@ -50,9 +51,20 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex-shrink-0 font-playfair text-2xl md:text-3xl font-bold text-accent hover:opacity-80 transition"
+            className="flex-shrink-0 flex items-center gap-2 md:gap-3 hover:opacity-80 transition-opacity duration-200"
           >
-            Readify
+            <div className="relative w-8 h-8 md:w-10 md:h-10">
+              <Image
+                src="/images/icons/bookl-logo1.png"
+                alt="Readify Logo"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+            <span className="font-playfair text-2xl md:text-3xl font-bold text-accent">
+              Readify
+            </span>
           </Link>
 
           {/* Desktop Menu */}
@@ -129,7 +141,7 @@ export default function Navbar() {
               </svg>
               {cartItemsCount > 0 && (
                 <motion.span
-                  className="absolute -top-2 -right-2 bg-accent text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-lg"
+                  className="absolute -top-2 -right-2 bg-gradient-to-br from-yellow-400 to-orange-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-lg"
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ type: "spring", stiffness: 200 }}
@@ -252,7 +264,7 @@ export default function Navbar() {
             >
               <span>Cart</span>
               {cartItemsCount > 0 && (
-                <span className="bg-accent text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                <span className="bg-gradient-to-br from-yellow-400 to-orange-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
                   {cartItemsCount}
                 </span>
               )}

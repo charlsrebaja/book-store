@@ -36,6 +36,7 @@ model Book {
   stock       Int
   rating      Float       @default(0)
   reviews     Int         @default(0)
+  isFeatured  Boolean     @default(false)
   orderItems  OrderItem[]
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt

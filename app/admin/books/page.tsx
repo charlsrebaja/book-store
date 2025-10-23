@@ -15,6 +15,7 @@ interface Book {
   stock: number;
   rating: number;
   reviews: number;
+  isFeatured?: boolean;
 }
 
 export default function BooksManagement() {
@@ -36,6 +37,7 @@ export default function BooksManagement() {
     category: "",
     imageUrl: "",
     stock: "",
+    isFeatured: false,
   });
 
   useEffect(() => {
@@ -109,6 +111,7 @@ export default function BooksManagement() {
       category: book.category,
       imageUrl: book.imageUrl || "",
       stock: book.stock.toString(),
+      isFeatured: book.isFeatured || false,
     });
     setShowModal(true);
   };
@@ -142,6 +145,7 @@ export default function BooksManagement() {
       category: "",
       imageUrl: "",
       stock: "",
+      isFeatured: false,
     });
     setImageFile(null);
   };
@@ -296,6 +300,9 @@ export default function BooksManagement() {
                     Stock
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Featured
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>
@@ -304,7 +311,7 @@ export default function BooksManagement() {
                 {filteredBooks.length === 0 ? (
                   <tr>
                     <td
-                      colSpan={6}
+                      colSpan={7}
                       className="px-6 py-4 text-center text-gray-500"
                     >
                       No books found
@@ -360,6 +367,16 @@ export default function BooksManagement() {
                         >
                           {book.stock}
                         </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {book.isFeatured ? (
+                          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-accent text-white">
+                            <span>🏆</span>
+                            Featured
+                          </span>
+                        ) : (
+                          <span className="text-gray-400 text-sm">-</span>
+                        )}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <button
@@ -554,6 +571,51 @@ export default function BooksManagement() {
                       </div>
                     )}
                   </div>
+                </div>
+
+                {/* Featured Book Toggle */}
+                <div className="flex items-center gap-3 p-4 bg-accent/5 rounded-lg border border-accent/20">
+                  <div className="relative flex items-center">
+                    <input
+                      type="checkbox"
+                      id="isFeatured"
+                      checked={formData.isFeatured}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          isFeatured: e.target.checked,
+                        })
+                      }
+                      className="w-5 h-5 text-accent bg-white border-2 border-gray-300 rounded focus:ring-accent focus:ring-2 cursor-pointer checked:bg-accent checked:border-accent appearance-none"
+                    />
+                    {formData.isFeatured && (
+                      <svg
+                        className="absolute w-5 h-5 text-white pointer-events-none"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={3}
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                    )}
+                  </div>
+                  <label
+                    htmlFor="isFeatured"
+                    className="flex flex-col cursor-pointer"
+                  >
+                    <span className="text-sm font-semibold text-darkBlue">
+                      🏆 Feature this Book
+                    </span>
+                    <span className="text-xs text-gray-600">
+                      This book will appear in the Featured Books section on the
+                      homepage
+                    </span>
+                  </label>
                 </div>
 
                 <div className="flex gap-4 pt-4">

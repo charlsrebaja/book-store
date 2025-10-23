@@ -33,6 +33,10 @@ export const metadata: Metadata = {
   description:
     "Discover and purchase your favorite books online with Readify, the premier digital bookstore.",
   keywords: ["books", "bookstore", "online shopping", "e-commerce"],
+  icons: {
+    icon: "/images/icons/bookl-logo1.png",
+    apple: "/images/icons/bookl-logo1.png",
+  },
   // ✅ CRITICAL: Force no-cache for HTML - prevents stale CSS
   other: {
     "cache-control": "no-cache, no-store, must-revalidate, max-age=0, public",

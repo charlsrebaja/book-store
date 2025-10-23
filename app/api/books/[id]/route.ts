@@ -72,6 +72,7 @@ export async function PUT(
         stock: parseInt(data.stock),
         rating: data.rating ? parseFloat(data.rating) : undefined,
         reviews: data.reviews ? parseInt(data.reviews) : undefined,
+        isFeatured: data.isFeatured !== undefined ? data.isFeatured : undefined,
       },
     });
 
