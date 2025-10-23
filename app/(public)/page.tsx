@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import FeaturedBooks from "@/components/FeaturedBooks";
 
 export default function Home() {
   return (
@@ -44,6 +45,9 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+      {/* Featured Books - Bestsellers Section */}
+      <FeaturedBooks />
 
       {/* Features Section */}
       <section className="py-20 px-4">
