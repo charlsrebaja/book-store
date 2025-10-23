@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Pagination, Autoplay } from "swiper/modules";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
@@ -10,7 +10,6 @@ import axios from "axios";
 
 // Import Swiper styles
 import "swiper/css";
-import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 interface Book {
@@ -100,10 +99,9 @@ export default function FeaturedBooks() {
           viewport={{ once: true }}
         >
           <Swiper
-            modules={[Navigation, Pagination, Autoplay]}
+            modules={[Pagination, Autoplay]}
             spaceBetween={24}
             slidesPerView={1}
-            navigation
             pagination={{ clickable: true }}
             autoplay={{
               delay: 4000,
@@ -234,28 +232,6 @@ export default function FeaturedBooks() {
 
       {/* Custom Swiper Styles */}
       <style jsx global>{`
-        .featured-books-swiper .swiper-button-next,
-        .featured-books-swiper .swiper-button-prev {
-          color: #1a3a52;
-          background: white;
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .featured-books-swiper .swiper-button-next:after,
-        .featured-books-swiper .swiper-button-prev:after {
-          font-size: 16px;
-          font-weight: bold;
-        }
-
-        .featured-books-swiper .swiper-button-next:hover,
-        .featured-books-swiper .swiper-button-prev:hover {
-          background: #1a3a52;
-          color: white;
-        }
-
         .featured-books-swiper .swiper-pagination-bullet {
           background: #9caf88;
           opacity: 0.5;
@@ -264,19 +240,6 @@ export default function FeaturedBooks() {
         .featured-books-swiper .swiper-pagination-bullet-active {
           background: #1a3a52;
           opacity: 1;
-        }
-
-        @media (max-width: 640px) {
-          .featured-books-swiper .swiper-button-next,
-          .featured-books-swiper .swiper-button-prev {
-            width: 32px;
-            height: 32px;
-          }
-
-          .featured-books-swiper .swiper-button-next:after,
-          .featured-books-swiper .swiper-button-prev:after {
-            font-size: 14px;
-          }
         }
       `}</style>
     </section>
