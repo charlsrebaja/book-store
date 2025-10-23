@@ -193,7 +193,7 @@ const nextConfig = {
 
   // ✅ EXPERIMENTAL OPTIMIZATIONS
   experimental: {
-    optimizePackageImports: ["@prisma/client", "next-auth"],
+    optimizePackageImports: ["next-auth"],
     serverComponentsExternalPackages: ["@prisma/client", "prisma"],
   },
 
